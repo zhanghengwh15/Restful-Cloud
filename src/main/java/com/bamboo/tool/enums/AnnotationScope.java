@@ -3,9 +3,9 @@ package com.bamboo.tool.enums;
 import lombok.Getter;
 
 /**
- * Create by GuoQing
  * Date 2022/2/16 13:07
  * Description
+ * @author Administrator
  */
 @Getter
 public enum AnnotationScope {
