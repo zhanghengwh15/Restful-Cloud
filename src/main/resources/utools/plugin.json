@@ -1,0 +1,13 @@
+{
+	"main": "index.html",
+	"logo": "logo.png",
+	"preload": "preload.js",
+	"cmds": [ "api", "url","Restful Cloud" ],
+	"features": [
+		{
+		  "code": "Restful Cloud",
+		  "explain": "Restful Cloud",
+			"cmds":["api", "url","Restful Cloud" ]
+		}
+	]
+}

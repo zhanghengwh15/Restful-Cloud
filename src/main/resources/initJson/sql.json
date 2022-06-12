@@ -1,0 +1,175 @@
+[
+  {
+    "tableName": "bamboo_project",
+    "creatSql": "create table bamboo_project(id integer not null   constraint bamboo_project_pk   primary key autoincrement,project_name  text,project_path  text);",
+    "index": [
+      "create unique index bamboo_project_id_uindex on bamboo_project (id);"
+    ]
+  },
+  {
+    "tableName": "bamboo_class",
+    "creatSql": "create table bamboo_class ( id text not null constraint bamboo_class_pk primary key, class_name text, model_name text, description blob, class_path text, project_id text, setting_id text, remark text );",
+    "index": [
+      "create unique index bamboo_class_id_uindex on bamboo_class (id);"
+    ]
+  },
+  {
+    "tableName": "bamboo_method",
+    "creatSql": "create table bamboo_method ( id text not null constraint bamboo_api_method_pk primary key, project_id text not null, method_name text, class_id text, description text, method_params blob, return_type text, remark text, query_count integer default 0 );",
+    "index": [
+      "create unique index bamboo_method_id_uindex on bamboo_method (id);"
+    ]
+  },
+  {
+    "tableName": "bamboo_api",
+    "creatSql": "create table bamboo_api(id  text not null constraint bamboo_api_pk primary key,method_id  text,url text,request_methods text,project_id   text,params   text,headers  text,consumes text,produces  text);",
+    "index": [
+      "create unique index bamboo_api_id_uindex on bamboo_api (id);"
+    ]
+  },
+  {
+    "tableName": "annotation_param_setting",
+    "creatSql": "create table annotation_param_setting(id  integer not null constraint annotation_param_pk primary key autoincrement,name  text,type  text,describe  text,annotation_info_setting_id integer);",
+    "index": [
+      "create unique index annotation_param_id_uindex on annotation_param_setting (id);"
+    ],
+    "datas": [
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 8);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'desc', null, 13);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'desc', null, 13);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'classUrl', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'classUrl', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'classUrl', null, 3);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 12);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 5);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 6);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 7);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('consumes', 'consumes', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('params', 'params', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('headers', 'headers', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('produces', 'produces', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'methodUrl', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'methodUrl', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'methodUrl', null, 4);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('name', 'poolUrl', null, 10);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('interfaceName', 'classUrl', null, 10);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('interfaceClass', 'classUrl', null, 11);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('desc', 'desc', null, 11);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('description', 'desc', null, 13);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('value', 'desc', null, 14);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('null', 'desc', null, 14);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('tags', 'desc', null, 13);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('name', 'poolUrl', null, 15);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('path', 'classUrl', null, 15);",
+      "INSERT INTO annotation_param_setting (name, type, describe, annotation_info_setting_id) VALUES ('method', 'requestMethod', null, 12);"
+    ]
+  },
+  {
+    "tableName": "annotation_method_scope",
+    "creatSql": "create table annotation_method_scope(id   integer not null constraint annotation_method_scope_pk primary key autoincrement,annotation_id integer,method_scope  text);",
+    "index": [
+      "create unique index annotation_method_scope_id_uindex on annotation_method_scope (id);"
+    ],
+    "datas": [
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (1, 11, 'public');",
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (2, 10, 'public');",
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (3, 1, 'annotation');",
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (4, 2, 'annotation');",
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (5, 5, 'annotation');",
+      "INSERT INTO annotation_method_scope (id, annotation_id, method_scope) VALUES (6, 15, 'annotation');"
+    ]
+  },
+  {
+    "tableName": "framework",
+    "creatSql": "create table framework(id       integer not null  constraint framework_pk  primary key autoincrement,name   text,describe text);",
+    "index": [
+      "create unique index framework_id_uindex  on framework (id);"
+    ],
+    "datas": [
+      "INSERT INTO framework (id, name, describe) VALUES (1, 'Spring', 'Spring');",
+      "INSERT INTO framework (id, name, describe) VALUES (2, 'o_dian_yun', 'o_dian_yun');",
+      "INSERT INTO framework (id, name, describe) VALUES (3, 'swagger', 'swagger');",
+      "INSERT INTO framework (id, name, describe) VALUES (4, 'spring_cloud', 'spring cloud');"
+    ]
+  },
+  {
+    "tableName": "annotation_info_setting",
+    "creatSql": " create table annotation_info_setting(id     integer not null constraint annotation_info_pk primary key autoincrement,class_path  text,class_short_name text,framework_id  integer,scope   text,soa_type  text,effect  text,is_delete integer);",
+    "index": [
+      "create unique index annotation_info_id_uindex on annotation_info_setting (id);"
+    ],
+    "datas": [
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (1, 'org.springframework.web.bind.annotation.RestController', 'RestController', 1, 'Class', 'service', 'scann', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (2, 'org.springframework.stereotype.Controller', 'Controller', 1, 'Class', 'service', 'scann', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (3, 'org.springframework.web.bind.annotation.RequestMapping', 'RequestMapping', 1, 'Class', 'service', 'attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (4, 'org.springframework.web.bind.annotation.GetMapping', 'GetMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (5, 'org.springframework.web.bind.annotation.PostMapping', 'PostMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (6, 'org.springframework.web.bind.annotation.DeleteMapping', 'DeleteMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (7, 'org.springframework.web.bind.annotation.PutMapping', 'PutMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (8, 'org.springframework.web.bind.annotation.PatchMapping', 'PatchMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (9, 'com.odianyun.soa.annotation.SoaMethodRegister', 'SoaMethodRegister', 2, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (10, 'com.odianyun.soa.client.annotation.SoaServiceClient', 'SoaServiceClient', 2, 'Class', 'client', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (11, 'com.odianyun.soa.annotation.SoaServiceRegister', 'SoaServiceRegister', 2, 'Class', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (12, 'org.springframework.web.bind.annotation.RequestMapping', 'RequestMapping', 1, 'Method', 'service', 'scann,attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (13, 'io.swagger.annotations.Api', 'Api', 3, 'Class', null, 'attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (14, 'io.swagger.annotations.ApiOperation', 'ApiOperation', 3, 'Method', null, 'attribute', 0);",
+      "INSERT INTO annotation_info_setting (id, class_path, class_short_name, framework_id, scope, soa_type, effect, is_delete) VALUES (15, 'org.springframework.cloud.openfeign.FeignClient', 'FeignClient', 4, 'Class', 'client', 'scann,attribute', 0);"
+    ]
+  },
+  {
+    "tableName": "bamboo_desc_framework",
+    "creatSql": "create table bamboo_desc_framework ( framework text, id text not null constraint bamboo_desc_framework_pk primary key, framework_code text, describe text, sequence integer );",
+    "index": [
+      "create unique index bamboo_desc_framework_id_uindex on bamboo_desc_framework (id);"
+    ],
+    "datas": [
+      "INSERT INTO bamboo_desc_framework (id, framework, framework_code, describe, sequence) VALUES ('1', '欧典云', 'o_dian_yun', null, 2);",
+      "INSERT INTO bamboo_desc_framework (id, framework, framework_code, describe, sequence) VALUES ('2', 'javadoc', 'javadoc', null, 3);",
+      "INSERT INTO bamboo_desc_framework (id, framework, framework_code, describe, sequence) VALUES ('3', 'swagger', 'swagger', null, 1);"
+    ]
+  },
+  {
+    "tableName": "bamboo_dict",
+    "creatSql": "create table bamboo_dict ( id text not null constraint bamboo_dict_pk primary key, key text, value text, description text );",
+    "index": [
+      "create unique index bamboo_dict_id_uindex on bamboo_dict (id);"
+    ],
+    "datas": [
+      "INSERT INTO bamboo_dict (id, key, value, description) VALUES ('1', 'isShowDesc', 'true', '是否开启描述');"
+    ]
+  }
+]

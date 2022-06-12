@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <title>bamboo-api</title>
+</head>
+<body>
+<div id="app">
+    <template>
+        <el-collapse v-if="inputText==''" v-model="activeNames">
+            <el-collapse-item v-for="(project,index) in projectList" :title="project.project_name" :name="index">
+                <el-descriptions>
+                    <el-descriptions-item label="项目名称">
+                        <el-tag size="small">{{project.project_name}}</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item label="类数量">
+                        <el-tag size="small">{{project.class_count}}</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item label="接口数量">
+                        <el-tag size="small">{{project.urls}}</el-tag>
+                    </el-descriptions-item>
+                    <el-descriptions-item label="项目地址">{{project.project_path}}</el-descriptions-item>
+                </el-descriptions>
+            </el-collapse-item>
+        </el-collapse>
+        <template v-if="inputText!=''">
+            <el-collapse v-model="activeMethods">
+                <el-collapse-item v-for="(method,index) in methods">
+                    <template slot="title">
+                        <el-col :span="20">
+                            <div class="grid-content">
+                                {{method.url}}
+                                <span class="class-name">
+                                 <el-tag size="small"> {{method.project_name}}</el-tag>
+                                 <el-tag size="small" type="success"  effect="dark"
+                                         v-if="method.types.includes('O_DIAN_YUN')&&method.types.includes('CLIENT')">消费</el-tag>
+                                     <el-tag size="small" type="danger"  effect="dark"
+                                             v-if="method.types.includes('O_DIAN_YUN')&&method.types.includes('SERVICE')">服务</el-tag>
+                               </span>
+                            </div>
+                        </el-col>
+                        <el-col :span="4">
+                            <div class="grid-content">
+                                <el-tag v-if="method.method_type.includes('GET')" size="mini" effect="dark">GET
+                                </el-tag>
+                                <el-tag v-if="method.method_type.includes('POST')" size="mini" type="danger"
+                                        effect="dark">
+                                    POST
+                                </el-tag>
+                                <el-tag v-if="method.method_type.includes('ALL')" size="mini" type="danger"
+                                        effect="dark">ALL
+                                </el-tag>
+                            </div>
+                        </el-col>
+                    </template>
+                    <el-descriptions column="1">
+                        <el-descriptions-item label="项目">
+                            <el-tag size="small"> {{method.project_name}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="项目地址">
+                            <el-tag size="small"> {{method.project_path}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="模块名">
+                            <el-tag size="small"> {{method.model_name}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="类名">
+                            <el-tag size="small">{{method.class_name}}.java</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="类描述">{{method.class_desc}}</el-descriptions-item>
+                        <el-descriptions-item label="方法名">
+                            <el-tag size="small">{{method.method_name}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="接口地址">
+                            <el-tag size="small">{{method.url}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item label="content-type">
+                            <el-tag size="small">{{method.content_type}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item v-if="method.header" label="header">
+                            <el-tag size="small">{{method.header}}</el-tag>
+                        </el-descriptions-item>
+                        <el-descriptions-item v-if="method.params" label="参数">{{method.params}}</el-descriptions-item>
+                    </el-descriptions>
+                </el-collapse-item>
+            </el-collapse>
+
+        </template>
+
+    </template>
+</div>
+
+
+<script type="text/javascript">
+
+    window.utools.onPluginReady(() => {
+        utools.setSubInput((onChange, placeholder, isFocus) => {
+            vue._data.inputText = onChange.text
+            let methods = window.getMethod(onChange.text);
+            vue._data.methods = methods
+
+        })
+    })
+
+    let vue = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                projectList: [],
+                inputText: "",
+                activeNames: [],
+                activeMethods: [],
+                methods: []
+            }
+        },
+        components: {},
+        mounted() {
+            this.projectList = window.getAllProject();
+        }
+    });
+
+</script>
+<style>
+
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+
+    .class-name {
+        color: #909399;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        font-size: 11px;
+    }
+
+    .el-icon-arrow-right:before {
+        content: ''
+    }
+</style>
+</body>
+</html>
