@@ -14,8 +14,9 @@ public class RestfulCloudSearchAction extends SearchEverywhereBaseAction impleme
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
-        if (project == null) return;
-
+        if (project == null){
+            return;
+        }
         boolean dumb = DumbService.isDumb(project);
         if (!dumb || new SymbolSearchEverywhereContributor(e).isDumbAware()) {
             String tabID = Registry.is("search.everywhere.group.contributors.by.type")

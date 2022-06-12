@@ -8,9 +8,9 @@ import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.project.Project;
 
 /**
- * Create by GuoQing
  * Date 2022/2/24 11:34
  * Description
+ * @author Administrator
  */
 
 @State(name = "BambooApiFilterConfiguration", storages = @Storage(StoragePathMacros.CACHE_FILE))
