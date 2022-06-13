@@ -62,7 +62,7 @@ public class BambooService {
             projectInfo.setProjectName(project.getName());
             BambooService.saveProject(projectInfo);
         }
-        List<SqliteMaster> tables = querTables();
+        List<SqliteMaster> tables = queryTables();
         Map<String, SqliteMaster> masterMap = tables.stream().collect(Collectors.toMap(SqliteMaster::getName, e -> e));
         List<String> exeSql = new ArrayList<>();
 
@@ -94,7 +94,7 @@ public class BambooService {
         }
     }
 
-    private static List<SqliteMaster> querTables() throws SQLException {
+    private static List<SqliteMaster> queryTables() throws SQLException {
 
         Connection conn = SqliteConfig.getConnection();
         Statement state = conn.createStatement();
