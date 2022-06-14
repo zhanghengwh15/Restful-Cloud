@@ -2,21 +2,33 @@ package com.tool;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RuntimeUtil;
+import cn.hutool.db.Db;
+import cn.hutool.db.Entity;
 import cn.hutool.db.ds.DataSourceWrapper;
+import cn.hutool.db.ds.pooled.DbConfig;
+import cn.hutool.db.ds.pooled.PooledDataSource;
 import cn.hutool.db.ds.simple.SimpleDataSource;
+import cn.hutool.setting.Setting;
+import lombok.Data;
 import lombok.SneakyThrows;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.sql.SQLException;
 
 
+@Data
 public class DataSourceWrapperTest {
 
-	@Test
-	@SneakyThrows
-	public void cloneTest(){
 
+	private Db db;
+
+	@Before
+	public void init() {
 		String db = FileUtil.getUserHomePath() + "\\restfulCloud\\restfulCloud.db";
 		final boolean exist = FileUtil.exist(db);
 		if (!exist) {
@@ -27,12 +39,43 @@ public class DataSourceWrapperTest {
 			RuntimeUtil.exec("sudo chmod -R 777 "+db);
 		}
 
-		final SimpleDataSource simpleDataSource = new SimpleDataSource("jdbc:sqlite:"+db, "", "");
-		final DataSourceWrapper wrapper = new DataSourceWrapper(simpleDataSource, "test.driver");
+		DbConfig config = new DbConfig("jdbc:sqlite:"+db, "", "");
+		config.setMaxActive(10);
+		PooledDataSource pooledDataSource = new PooledDataSource(config);
+	    this.setDb(Db.use(pooledDataSource));
+	}
 
-		// final DataSourceWrapper clone = wrapper.clone();
-		assertEquals("test.driver", wrapper.getDriver());
-		assertEquals(simpleDataSource, wrapper.getRaw());
+
+	/**
+	 * 对增删改查做单元测试
+	 *
+	 * @throws SQLException SQL异常
+	 */
+
+	@Test
+	// @Ignore
+	public void crudTest() throws SQLException {
+
+		this.init();
+
+		// db.execute("CREATE TABLE test(a INTEGER, b BIGINT)");
+		// 增
+		Long id = db.insertForGeneratedKey(Entity.create("user").set("name", "unitTestUser").set("age", 66));
+		Assert.assertTrue(id > 0);
+		Entity result = db.get("user", "name", "unitTestUser");
+		Assert.assertSame(66, result.getInt("age"));
+
+		// 改
+		int update = db.update(Entity.create().set("age", 88), Entity.create("user").set("name", "unitTestUser"));
+		Assert.assertTrue(update > 0);
+		Entity result2 = db.get("user", "name", "unitTestUser");
+		Assert.assertSame(88, result2.getInt("age"));
+
+		// 删
+		int del = db.del("user", "name", "unitTestUser");
+		Assert.assertTrue(del > 0);
+		Entity result3 = db.get("user", "name", "unitTestUser");
+		Assert.assertNull(result3);
 	}
 
 
