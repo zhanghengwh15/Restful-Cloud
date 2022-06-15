@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -63,13 +64,13 @@ public class DataSourceWrapperTest {
 		Long id = db.insertForGeneratedKey(Entity.create("user").set("name", "unitTestUser").set("age", 66));
 		Assert.assertTrue(id > 0);
 		Entity result = db.get("user", "name", "unitTestUser");
-		Assert.assertSame(66, result.getInt("age"));
+		assertEquals(66, result.getInt("age"));
 
 		// 改
 		int update = db.update(Entity.create().set("age", 88), Entity.create("user").set("name", "unitTestUser"));
 		Assert.assertTrue(update > 0);
 		Entity result2 = db.get("user", "name", "unitTestUser");
-		Assert.assertSame(88, result2.getInt("age"));
+		assertEquals(88, result2.getInt("age"));
 
 		// 删
 		int del = db.del("user", "name", "unitTestUser");

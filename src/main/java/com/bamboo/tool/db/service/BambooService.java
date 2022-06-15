@@ -393,7 +393,6 @@ public class BambooService {
         List<AnnotationMethodScope> annotationMethodScopes = methodScopeMap.get(id);
         List<AnnotationParam> params = paramMap.get(id);
 
-
         annotationInfoSetting.setId(id);
         annotationInfoSetting.setAnnotationPath(classPath);
         annotationInfoSetting.setAnnotationName(classShortName);
